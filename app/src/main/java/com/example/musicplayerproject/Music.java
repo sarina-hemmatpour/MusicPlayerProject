@@ -52,6 +52,8 @@ public class Music {
 
     public static List<Music> getList(){
         List<Music> musicList=new ArrayList<>();
+
+
         Music music1 = new Music();
         music1.setArtist("Lana Del Rey");
         music1.setName("Dark Paradise");
@@ -71,14 +73,14 @@ public class Music {
         music3.setArtistResId(R.drawable.music_3_artist);
 
         Music music4=new Music();
-        music3.setArtist("Gloria Gaynor");
-        music3.setName("I Will Survive");
-        music3.setCoverResId(R.drawable.music_4_cover);
-        music3.setArtistResId(R.drawable.music_4_artist);
+        music4.setArtist("Gloria Gaynor");
+        music4.setName("I Will Survive");
+        music4.setCoverResId(R.drawable.music_4_cover);
+        music4.setArtistResId(R.drawable.music_4_artist);
 
+        musicList.add(music1);
         musicList.add(music2);
         musicList.add(music3);
-        musicList.add(music1);
         musicList.add(music4);
         return musicList;
     }
