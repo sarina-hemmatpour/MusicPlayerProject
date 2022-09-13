@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/img_itemMusic_cover"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:actualImageResource="@drawable/music_1_cover"
+        app:roundedCornerRadius="8dp"
+        app:viewAspectRatio="1" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/img_itemMusic_cover"
+        android:layout_marginStart="12dp">
+        <TextView
+            android:id="@+id/tv_itemMusic_songTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dark Paradise"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/tv_itemMusic_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lana Del Rey"
+            android:textColor="@color/white80Alpha"
+            android:textSize="12sp"/>
+    </LinearLayout>
+</RelativeLayout>
