@@ -16,8 +16,8 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MusicViewHol
 
     private List<Music> musicList;
 
-    public MusicAdapter() {
-        this.musicList = Music.getList();
+    public MusicAdapter(List<Music> musicList) {
+        this.musicList = musicList;
     }
 
     @NonNull
@@ -54,4 +54,8 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MusicViewHol
             tvArtist.setText(music.getArtist());
         }
     }
+
+
+
+
 }
