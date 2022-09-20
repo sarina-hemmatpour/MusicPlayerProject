@@ -106,6 +106,7 @@
             android:layout_marginTop="8dp">
 
             <ImageView
+                android:id="@+id/img_main_backward"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_skip_24dp"
@@ -120,6 +121,7 @@
                 android:scaleType="centerInside"/>
 
             <ImageView
+                android:id="@+id/img_main_forward"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_skip_forward_24dp"

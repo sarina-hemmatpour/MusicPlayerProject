@@ -43,4 +43,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.facebook.fresco:fresco:2.6.0'
+
+    implementation 'com.airbnb.android:lottie:5.2.0'
 }

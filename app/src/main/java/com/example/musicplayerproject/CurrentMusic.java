@@ -5,6 +5,15 @@ public class CurrentMusic{
 
     private MusicState state=MusicState.PAUSED;
     private Music music;
+    private int index;
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getIndex() {
+        return index;
+    }
 
     public Music getMusic() {
         return music;
