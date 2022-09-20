@@ -20,13 +20,13 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MusicAdapter.MusicClickedListener {
 
     private ActivityMainBinding binding;
 
     private MediaPlayer mediaPlayer;
 
-    private CurrentMusic currentMusic=new CurrentMusic();
+    public CurrentMusic currentMusic=new CurrentMusic();
 
     private List<Music> musicList =Music.getList();
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView rvMusicList=binding.rvMainPlaylist;
         rvMusicList.setLayoutManager(new LinearLayoutManager(this , RecyclerView.VERTICAL , false));
-        musicAdapter=new MusicAdapter(musicList);
+        musicAdapter=new MusicAdapter(musicList ,this);
         rvMusicList.setAdapter(musicAdapter);
 
         onMusicChange(musicList.get(0) , 0);
@@ -61,11 +61,13 @@ public class MainActivity extends AppCompatActivity {
                         mediaPlayer.start();
                         currentMusic.setState(CurrentMusic.MusicState.PLAYING);
                         binding.btnMainPlay.setImageResource(R.drawable.ic_pause_24dp);
+                        musicAdapter.onMusicStateChanged(currentMusic.getMusic());
                         break;
                     case PLAYING:
                         mediaPlayer.pause();
                         currentMusic.setState(CurrentMusic.MusicState.PAUSED);
                         binding.btnMainPlay.setImageResource(R.drawable.ic_play_32dp);
+                        musicAdapter.onMusicStateChanged(currentMusic.getMusic());
 
                 }
             }
@@ -117,8 +119,12 @@ public class MainActivity extends AppCompatActivity {
 
         binding.sliderMainMusic.setValue(0);
 
+        musicAdapter.setPlaying(true);
+
         currentMusic.setMusic(music);
         currentMusic.setIndex(index);
+
+        musicAdapter.onMusicChanged(music);
 
         mediaPlayer=MediaPlayer.create(this , music.getFileResId());
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -216,5 +222,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onMusicClicked(Music music) {
+        int index=musicList.indexOf(music);
+        if(index==-1)
+            return;
 
+        timer.cancel();
+        timer.purge();
+        mediaPlayer.release();
+        onMusicChange(musicList.get(index) , index);
+    }
 }

@@ -35,4 +35,13 @@
             android:textColor="@color/white80Alpha"
             android:textSize="12sp"/>
     </LinearLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/item_animation_playing"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        app:lottie_rawRes="@raw/music_effect"
+        android:layout_centerVertical="true"
+        app:lottie_loop="true"/>
 </RelativeLayout>
