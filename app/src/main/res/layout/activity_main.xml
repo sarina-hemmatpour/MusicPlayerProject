@@ -98,37 +98,61 @@
                 android:layout_gravity="end"/>
         </FrameLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp">
+       <FrameLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="8dp">
 
-            <ImageView
-                android:id="@+id/img_main_backward"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_skip_24dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="24dp"/>
+           <ImageView
+               android:id="@+id/main_img_shuffle"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center_vertical|start"
+               android:layout_marginStart="32dp"
+               app:srcCompat="@drawable/ic_baseline_shuffle_24" />
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_gravity="center_horizontal">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_main_play"
-                android:src="@drawable/ic_play_32dp"
-                android:scaleType="centerInside"/>
+               <ImageView
+                   android:id="@+id/img_main_backward"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:srcCompat="@drawable/ic_skip_24dp"
+                   android:layout_gravity="center_vertical"
+                   android:layout_marginEnd="24dp"
+                   android:clickable="true"
+                   android:focusable="true" />
 
-            <ImageView
-                android:id="@+id/img_main_forward"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_skip_forward_24dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="24dp"/>
+               <com.google.android.material.floatingactionbutton.FloatingActionButton
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/btn_main_play"
+                   android:src="@drawable/ic_play_32dp"
+                   android:scaleType="centerInside"/>
 
-        </LinearLayout>
+               <ImageView
+                   android:id="@+id/img_main_forward"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:srcCompat="@drawable/ic_skip_forward_24dp"
+                   android:layout_gravity="center_vertical"
+                   android:layout_marginStart="24dp"
+                   android:clickable="true"
+                   android:focusable="true" />
+
+           </LinearLayout>
+
+           <ImageView
+               android:id="@+id/main_img_repeat"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center_vertical|end"
+               android:layout_marginEnd="32dp"
+               app:srcCompat="@drawable/ic_baseline_repeat_24" />
+       </FrameLayout>
 
         <TextView
             android:layout_width="wrap_content"

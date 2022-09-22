@@ -22,6 +22,8 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements MusicAdapter.MusicClickedListener {
 
+    //************************shuffle
+    //************************lyrics
     private ActivityMainBinding binding;
 
     private MediaPlayer mediaPlayer;
@@ -98,14 +100,57 @@ public class MainActivity extends AppCompatActivity implements MusicAdapter.Musi
         binding.imgMainForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goForward();
+                changingMusicValidation(true);
             }
         });
 
         binding.imgMainBackward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goBackward();
+                changingMusicValidation(false);
+//                goBackward();
+            }
+        });
+
+        binding.mainImgRepeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentMusic.setRepeat(!currentMusic.isRepeat());
+                //changing color
+                if(currentMusic.isRepeat())
+                {
+                    //binding.mainImgRepeat.setImageAlpha(100);
+                    //turning shuffle off
+                    currentMusic.setShuffle(false);
+                    binding.mainImgShuffle.setImageResource(R.drawable.ic_baseline_shuffle_24);
+
+                    binding.mainImgRepeat.setImageResource(R.drawable.ic_baseline_repeat_24_alpha100);
+                }
+                else
+                {
+                    //binding.mainImgRepeat.setImageAlpha(55);
+                    binding.mainImgRepeat.setImageResource(R.drawable.ic_baseline_repeat_24);
+
+                }
+
+            }
+        });
+        binding.mainImgShuffle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentMusic.setShuffle(!currentMusic.isShuffle());
+
+                if (currentMusic.isShuffle())
+                {
+                    //turning off repeat
+                    currentMusic.setRepeat(false);
+                    binding.mainImgRepeat.setImageResource(R.drawable.ic_baseline_repeat_24);
+
+                    binding.mainImgShuffle.setImageResource(R.drawable.ic_baseline_shuffle_24_alpha100);
+                }
+                else
+                    binding.mainImgShuffle.setImageResource(R.drawable.ic_baseline_shuffle_24);
+
             }
         });
 
@@ -165,7 +210,8 @@ public class MainActivity extends AppCompatActivity implements MusicAdapter.Musi
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
-                        goForward();
+                        changingMusicValidation(true);
+//                        goForward();
                     }
                 });
             }
@@ -178,6 +224,27 @@ public class MainActivity extends AppCompatActivity implements MusicAdapter.Musi
         binding.tvMainName.setText(music.getName());
     }
 
+    private void changingMusicValidation(boolean forward)
+    {
+        if(currentMusic.isRepeat())
+        {
+            timer.cancel();
+            timer.purge();
+            mediaPlayer.release();
+            onMusicChange(currentMusic.getMusic() , currentMusic.getIndex());
+        }
+        else if(currentMusic.isShuffle())
+        {
+            //random index ***********************
+        }
+        else
+        {
+            if(forward)
+                goForward();
+            else
+                goBackward();
+        }
+    }
 
 
     @Override
@@ -232,5 +299,16 @@ public class MainActivity extends AppCompatActivity implements MusicAdapter.Musi
         timer.purge();
         mediaPlayer.release();
         onMusicChange(musicList.get(index) , index);
+    }
+
+    private int generateRandomIndex()
+    {
+        int currentIndex=currentMusic.getIndex();
+        int newIndex=-1;
+        while (newIndex==currentIndex)
+        {
+
+        }
+        return newIndex;
     }
 }
