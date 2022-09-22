@@ -113,13 +113,13 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MusicViewHol
         notifyItemChanged(currentPos);
     }
 
-    public void onMusicStateChanged(Music music )
+    public void onMusicStateChanged(Music music , boolean state)
     {
         int index=musicList.indexOf(music);
         if (index==-1)
             return;
 
-        isPlaying=!isPlaying;
+        isPlaying=state;
         notifyItemChanged(index);
 
     }

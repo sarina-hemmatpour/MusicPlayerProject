@@ -17,12 +17,12 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.material.slider.Slider;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements MusicAdapter.MusicClickedListener {
 
-    //************************shuffle
     //************************lyrics
     private ActivityMainBinding binding;
 
@@ -63,13 +63,13 @@ public class MainActivity extends AppCompatActivity implements MusicAdapter.Musi
                         mediaPlayer.start();
                         currentMusic.setState(CurrentMusic.MusicState.PLAYING);
                         binding.btnMainPlay.setImageResource(R.drawable.ic_pause_24dp);
-                        musicAdapter.onMusicStateChanged(currentMusic.getMusic());
+                        musicAdapter.onMusicStateChanged(currentMusic.getMusic() ,true);
                         break;
                     case PLAYING:
                         mediaPlayer.pause();
                         currentMusic.setState(CurrentMusic.MusicState.PAUSED);
                         binding.btnMainPlay.setImageResource(R.drawable.ic_play_32dp);
-                        musicAdapter.onMusicStateChanged(currentMusic.getMusic());
+                        musicAdapter.onMusicStateChanged(currentMusic.getMusic() , false);
 
                 }
             }
@@ -176,6 +176,8 @@ public class MainActivity extends AppCompatActivity implements MusicAdapter.Musi
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
                 mediaPlayer.start();
+                currentMusic.setState(CurrentMusic.MusicState.PLAYING);
+                musicAdapter.onMusicStateChanged(currentMusic.getMusic() , true);
                 binding.sliderMainMusic.setValue(0);
 
                 timer=new Timer();
@@ -235,7 +237,12 @@ public class MainActivity extends AppCompatActivity implements MusicAdapter.Musi
         }
         else if(currentMusic.isShuffle())
         {
-            //random index ***********************
+            //random index
+            timer.cancel();
+            timer.purge();
+            mediaPlayer.release();
+            int randomPos=generateRandomIndex();
+            onMusicChange(musicList.get(randomPos) , randomPos);
         }
         else
         {
@@ -305,10 +312,11 @@ public class MainActivity extends AppCompatActivity implements MusicAdapter.Musi
     {
         int currentIndex=currentMusic.getIndex();
         int newIndex=-1;
-        while (newIndex==currentIndex)
+        Random random=new Random();
+        do
         {
-
-        }
+            newIndex=random.nextInt(musicList.size());
+        }while (newIndex==currentIndex);
         return newIndex;
     }
 }
